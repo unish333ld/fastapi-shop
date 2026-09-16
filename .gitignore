@@ -41,6 +41,7 @@ coverage.xml
 *.db
 *.sqlite
 *.sqlite3
+shop.db
 
 node_modules/
 jspm_packages/

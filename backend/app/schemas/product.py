@@ -20,7 +20,7 @@ class ProductResponse(BaseModel):
     price: float
     category_id: int
     image_url: Optional[str]
-    created_at: datetime
+    created_at: datetime = Field(..., validation_alias="category_at")
     category: CategoryResponse = Field(..., description="Product category details")
 
     class Config:

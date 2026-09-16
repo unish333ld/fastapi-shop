@@ -3,23 +3,23 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from .routes import cart_router, categories_router, products_router
 from .database import init_db
-from .config import Settings
+from .config import settings
 
 app = FastAPI(
-    title=Settings.app_name,
-    debug=Settings.debug,
+    title=settings.app_name,
+    debug=settings.debug,
     docs_url="/api/docs",
     redoc_url="/api/redoc",
 )
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=Settings.cors_origins,
+    allow_origins=settings.cors_allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-app.mount("/static", StaticFiles(directory=Settings.static_dir), name="static")
+app.mount("/static", StaticFiles(directory=settings.static_dir), name="static")
 app.include_router(cart_router)
 app.include_router(categories_router)
 app.include_router(products_router)

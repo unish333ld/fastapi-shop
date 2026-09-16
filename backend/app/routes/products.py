@@ -1,4 +1,3 @@
-from backend.app.routes.categories import router
 from fastapi import APIRouter, Depends, status
 from sqlalchemy.orm import Session
 from ..database import get_db
@@ -24,4 +23,4 @@ def get_product(product_id: int, db: Session = Depends(get_db)):
 @router.get("/category/{category_id}", response_model=ProductListResponse, status_code=status.HTTP_200_OK)
 def get_products_by_category(category_id: int, db: Session = Depends(get_db)):
     service = ProductService(db)
-    return service.get_product_by_id(category_id)
+    return service.get_products_by_category(category_id)
