@@ -9,8 +9,8 @@ class CartItemCreate(CartItemBase):
     pass
 
 class CartItemUpdate(BaseModel):
-    product_id: int = Field(None, description="Product ID")
-    quantity: int = Field(None, gt=0, description="New quantity must be greater than 0")
+    product_id: int = Field(..., description="Product ID")
+    quantity: int = Field(..., gt=0, description="New quantity must be greater than 0")
 
 class CartItem(BaseModel):
     product_id: int

@@ -54,6 +54,7 @@ pnpm-debug.log*
 .output
 .vite
 .cache/
+.repowise/
 
 .env
 .env.local

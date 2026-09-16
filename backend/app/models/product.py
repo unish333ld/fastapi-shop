@@ -1,7 +1,8 @@
 from sqlalchemy import Column, Integer, String, DateTime, Float, ForeignKey, Text
-from sqlalchemy.ext.declarative import relationship
-from sqlalchemy.orm import Base
+from sqlalchemy.orm import relationship
 from datetime import datetime
+
+from ..database import Base
 
 class Product(Base):
     __tablename__ = "products"
