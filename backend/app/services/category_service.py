@@ -15,7 +15,7 @@ class CategoryService:
     def get_category_by_id(self, category_id: int) -> CategoryResponse:
         category = self.repository.get_by_id(category_id)
         if not category:
-            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Category with id {category_id} not found")
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Категория с id {category_id} не найдена")
         return CategoryResponse.model_validate(category)
 
     def create_category(self, category_data: CategoryCreate) -> CategoryResponse:

@@ -12,6 +12,7 @@ class Settings(BaseSettings):
     ]
     static_dir: str = "static"
     images_dir: str = "static/images"
+    jwt_secret_key: str = "local-development-secret-key-change-in-production"
 
     class Config:
         env_file = ".env"

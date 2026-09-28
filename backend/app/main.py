@@ -1,9 +1,10 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from .routes import cart_router, categories_router, products_router
+from .routes import auth_router, cart_router, categories_router, products_router
 from .database import init_db
 from .config import settings
+from .auth import security
 
 app = FastAPI(
     title=settings.app_name,
@@ -11,6 +12,7 @@ app = FastAPI(
     docs_url="/api/docs",
     redoc_url="/api/redoc",
 )
+security.handle_errors(app)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.cors_allowed_origins,
@@ -23,6 +25,7 @@ app.mount("/static", StaticFiles(directory=settings.static_dir), name="static")
 app.include_router(cart_router)
 app.include_router(categories_router)
 app.include_router(products_router)
+app.include_router(auth_router)
 
 @app.on_event("startup")
 def on_event():
@@ -32,7 +35,7 @@ def on_event():
 @app.get("/")
 def root():
     return {
-        "message": "Welcome to our shop!",
+        "message": "Добро пожаловать в наш магазин!",
         "docs": "/api/docs",
     }
     
