@@ -4,7 +4,7 @@ from typing import Dict
 from ..services.cart_services import CartService
 from ..database import get_db
 from ..schemas.cart import CartItemCreate, CartResponse, CartItemUpdate
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 router = APIRouter(
@@ -15,15 +15,15 @@ router = APIRouter(
 class AddToCartRequest(BaseModel):
     product_id: int
     quantity: int
-    cart: Dict[int, int] = {}
+    cart: Dict[int, int] = Field(default_factory=dict)
 
 class UpdateCartRequest(BaseModel):
     product_id: int
     quantity: int
-    cart: Dict[int, int] = {}
+    cart: Dict[int, int] = Field(default_factory=dict)
 
 class RemoveFromCartRequest(BaseModel):
-    cart: Dict[int, int] = {}
+    cart: Dict[int, int] = Field(default_factory=dict)
 
 @router.post("/add", status_code=status.HTTP_200_OK)
 def add_to_cart(request: AddToCartRequest, db: Session = Depends(get_db)):
